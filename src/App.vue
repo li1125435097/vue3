@@ -1,7 +1,7 @@
 <script setup>
 import { ref,computed } from 'vue';
 
-// import List from './components/List.vue'
+// import list from './components/List.vue'
 let list = ref([
   {
     id: 1,
@@ -37,7 +37,11 @@ function handle(e) {
 
 <template>
   <main>
-    
+    <ul>
+      <li v-for="(item, index) in list" :key="index">
+        名称：{{ item.name }} 年龄：{{ item.age }} 地址：{{ item.address }}
+      </li>
+    </ul>
     <div>个数：{{ total }}</div>
     <form action="" @submit.prevent="handle">
       名字：<input type="text" name="name" placeholder="请输入名称">
