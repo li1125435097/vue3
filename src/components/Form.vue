@@ -1,11 +1,13 @@
 <script setup>
 import { defineProps } from 'vue';
+import {DataElf} from '../common/dataElf'
 defineProps({
   handle: {
     type: Function,
     required: true
   }
 })
+DataElf.on('data',(...args)=>{console.log(args,'我是form子组件')})
 </script>
 
 <template>
