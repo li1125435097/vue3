@@ -1,15 +1,8 @@
 <script setup>
-import { defineProps } from 'vue';
-defineProps({
-  list: {
-    type: Array,
-    required: true
-  },
-  total:{
-    type: Number,
-    required: true
-  }
-})
+import { DataCache } from '../common/dataCache';
+
+let list = DataCache.get('list')
+let total = DataCache.get('total')
 </script>
 
 <template>

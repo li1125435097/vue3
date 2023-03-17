@@ -1,5 +1,5 @@
 <script setup>
-import { ref,computed,onMounted } from 'vue';
+import { computed,onMounted } from 'vue';
 
 import List from './components/List.vue'
 import Form from './components/Form.vue'
@@ -7,17 +7,18 @@ import Fade from './components/Fade.vue'
 
 import { getList } from './common/api'
 import { DataElf } from './common/dataElf'
+import { DataCache } from './common/dataCache'
 
-// 响应式数据定义
-let list = ref([])
+// 响应式全局数据定义
+let list = DataCache.set('list')
+DataCache.set('total',computed(()=>{ return list.value.length }),null)
+DataCache.set('handle',handle,null)
 
 // 获取异步数据
 onMounted(async ()=>{
   list.value = await getList()
 })
 
-// 博客篇数统计
-const total = computed(()=>{ return list.value.length })
 
 // 表单提交函数
 function handle(e) {
@@ -34,8 +35,8 @@ DataElf.on('data',(...args)=>{console.log(args)})
 
 <template>
     <main>
-      <List :list=list :total=total></List>
-      <Form :handle=handle></Form>
+      <List></List>
+      <Form></Form>
       <Fade></Fade>
     </main>
 </template>
